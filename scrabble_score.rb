@@ -1,31 +1,28 @@
+require 'byebug'
 class Scrabble
-  def initialize
-  @sum = 0 
+  attr_reader :string
+  
+  def initialize(string)
+  @string = string
   end
-  def self.score(string)
 
-    str_arr = string.upcase.split("")
-    
-      (0..str_arr.size-1).each{|item|
-        if str_arr == '' && str_arr == ' \t\n '
-        end
+  def score
+  str_arr = string.upcase.split('')
+  sum = 0
+  str_arr.each{|item|
+  sum += item_scores[item]
+  }
+  sum
+  end
 
-      if str_arr[item] == 'A' || str_arr[item] == 'E' ||  str_arr[item] == 'I' ||  str_arr[item] =='O' ||  str_arr[item] == 'U' ||  str_arr[item] == 'L' ||  str_arr[item] =='N' ||  str_arr[item] == 'R' ||  str_arr[item] =='S' ||  str_arr[item] =='T'
-        @sum += 1
-      elsif str_arr[item] == 'D' ||  str_arr[item] == 'G'
-        @sum += 2
-      elsif str_arr[item] == 'B' || str_arr[item] == 'C' || str_arr[item] =='M' || str_arr[item] =='P'
-        @sum += 3
-      elsif str_arr[item] == 'F' || str_arr[item] =='H' || str_arr[item] =='V' || str_arr[item] =='W' || str_arr[item] =='Y'
-        @sum += 4
-      elsif str_arr[item] == 'K'
-        @sum += 5
-      elsif str_arr[item] == 'J' || str_arr[item] =='X'
-        @sum += 8
-      elsif str_arr[item] == 'Q' || str_arr[item] =='Z'
-        @sum += 10
-      end
-      }
-    end
-    @sum
+  def item_scores
+  {"A"=>1, "B"=>3, "C"=>3, "D"=>2,
+   "E"=>1, "F"=>4, "G"=>2, "H"=>4,
+   "I"=>1, "J"=>8, "K"=>5, "L"=>1,
+   "M"=>3, "N"=>1, "O"=>1, "P"=>3,
+   "Q"=>10, "R"=>1, "S"=>1, "T"=>1,
+   "U"=>1, "V"=>4, "W"=>4, "X"=>8,
+   "Y"=>4, "Z"=>10
+  } 
+  end
 end
